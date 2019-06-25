@@ -3,6 +3,7 @@ The ['Rain in Australia'](https://www.kaggle.com/jsphyg/weather-dataset-rattle-p
 
 ## Columns (per Kaggle)
 **Date** The date of observation
+
 **Location** The common name of the location of the weather station
 **State** The state the weather station is located in
 **MinTemp** The minimum temperature in degrees celsius
