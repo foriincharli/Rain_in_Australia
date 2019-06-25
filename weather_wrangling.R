@@ -28,11 +28,24 @@ df1$State <- ifelse(grepl("Ballarat|Bendigo|Sale|MelbourneAirport|Melbourne|Mild
 
 unique(df1$State) # check that there are no instances of 'other' in the State column
 
-# reorder columns so 'Location' and 'State' are next to each other
-df1 <- df1[c(1,2,25,3,4,5,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24)]
-
 # split 'Date' into 'Year', 'Month' and 'Day'
 df1 <- separate(df1, "Date", c("Year", "Month", "Day"), sep = "-")
 
-# write new csv for posterity
-write.csv(df1, "weather_extra.csv")
+
+# add month name column
+df1$Month <- gsub("(^|[^0-9])0+", "\\1", df1$Month, perl = TRUE) # remove 0s from month numbers
+
+mymonths <- c("Jan","Feb","Mar",
+              "Apr","May","Jun",
+              "Jul","Aug","Sep",
+              "Oct","Nov","Dec")
+
+df1$Month <- as.integer(df1$Month)
+df1$MonthName <- mymonths[df1$Month]
+
+
+# reorder columns so 'Location' and 'State' are next to each other as are 'Month' and 'MonthName'
+df1 <- df1[c(1,2,28,3,4,29,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27)]
+
+# write.csv
+write.csv(df1, "weather_vic_subset_2.csv", row.names = FALSE)
